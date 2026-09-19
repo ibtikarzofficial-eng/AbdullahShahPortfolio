@@ -1,4 +1,4 @@
-<<<!doctype html>
+<!doctype html>
 
 <html lang="en">
 
@@ -10,10 +10,6 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   />
-
-  <!-- =====================================================
-       BASIC SEO
-  ====================================================== -->
 
   <title>
     Abdullah Shah — Creative Developer
@@ -61,12 +57,12 @@
 
   <meta
     property="og:image"
-    content="/abdullah-hero.png"
+    content="/abdullah-hero.webp"
   />
 
 
   <!-- =====================================================
-       TWITTER / SOCIAL CARDS
+       TWITTER
   ====================================================== -->
 
   <meta
@@ -86,7 +82,7 @@
 
   <meta
     name="twitter:image"
-    content="/abdullah-hero.png"
+    content="/abdullah-hero.webp"
   />
 
 
@@ -100,12 +96,18 @@
     href="/favicon.svg"
   />
 
-  <img
-  src="/abdullah-hero.webp"
-  alt="Abdullah Shah"
-  loading="lazy"
-  decoding="async"
-/>
+
+  <!-- =====================================================
+       HERO PRELOAD
+  ====================================================== -->
+
+  <link
+    rel="preload"
+    as="image"
+    href="/abdullah-hero.webp"
+    type="image/webp"
+    fetchpriority="high"
+  />
 
 </head>
 
@@ -113,12 +115,14 @@
 <body>
 
   <!-- =====================================================
-       NETLIFY FORM REGISTRATION
+       NETLIFY STATIC FORM BLUEPRINT
 
-       Netlify scans generated/static HTML during deployment.
+       IMPORTANT:
+       Netlify reads this during BUILD time.
 
-       Our actual visible form lives inside Contact.jsx.
-       This hidden version registers the fields with Netlify.
+       React later renders the visible version.
+
+       Field names MUST match Contact.jsx exactly.
   ====================================================== -->
 
   <form
@@ -126,7 +130,18 @@
     method="POST"
     data-netlify="true"
     netlify-honeypot="bot-field"
-    hidden
+    style="
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+    "
+    aria-hidden="true"
   >
 
     <input
@@ -191,7 +206,6 @@
   ====================================================== -->
 
   <div id="root"></div>
-
 
   <script
     type="module"
