@@ -81,13 +81,6 @@ export default function Contact() {
 
   /* ========================================================
      ABOUT -> CONTACT REVEAL
-
-     IMPORTANT:
-     Contact is visible by DEFAULT in CSS.
-
-     JS only enhances the reveal.
-
-     If GSAP ever fails, Contact remains completely usable.
   ======================================================== */
 
   useLayoutEffect(() => {
@@ -112,13 +105,6 @@ export default function Contact() {
 
     const ctx =
       gsap.context(() => {
-        /*
-         * We use immediateRender:false.
-         *
-         * Contact therefore does NOT get
-         * hidden during initial page render.
-         */
-
         gsap.fromTo(
           stage,
           {
@@ -189,12 +175,7 @@ export default function Contact() {
         }
       }, section);
 
-    /*
-     * Images/layout can affect page height.
-     * Give browser one frame, then recalculate.
-     */
-
-    const refreshFrame =
+    const frame =
       requestAnimationFrame(
         () => {
           ScrollTrigger.refresh();
@@ -203,7 +184,7 @@ export default function Contact() {
 
     return () => {
       cancelAnimationFrame(
-        refreshFrame
+        frame
       );
 
       ctx.revert();
@@ -211,7 +192,7 @@ export default function Contact() {
   }, []);
 
   /* ========================================================
-     SUBTLE POINTER DEPTH
+     BACKGROUND DEPTH
   ======================================================== */
 
   useEffect(() => {
@@ -231,6 +212,7 @@ export default function Contact() {
         'x',
         {
           duration: 1.4,
+
           ease: 'power3.out',
         }
       );
@@ -241,6 +223,7 @@ export default function Contact() {
         'y',
         {
           duration: 1.4,
+
           ease: 'power3.out',
         }
       );
@@ -304,7 +287,12 @@ export default function Contact() {
   }, []);
 
   /* ========================================================
-     NETLIFY FORM
+     NETLIFY SUBMISSION
+
+     IMPORTANT:
+     POST DIRECTLY TO "/"
+
+     This matches Netlify's documented AJAX pattern.
   ======================================================== */
 
   const handleSubmit =
@@ -324,17 +312,22 @@ export default function Contact() {
       const formData =
         new FormData(form);
 
+      /*
+       * Explicitly ensure the registered
+       * Netlify form name is present.
+       */
+
       formData.set(
         'form-name',
         'project-enquiry'
       );
 
-      const encoded =
+      const body =
         new URLSearchParams();
 
       formData.forEach(
         (value, key) => {
-          encoded.append(
+          body.append(
             key,
             String(value)
           );
@@ -347,24 +340,21 @@ export default function Contact() {
 
       try {
         const response =
-          await fetch(
-            '/netlify-form.html',
-            {
-              method: 'POST',
+          await fetch('/', {
+            method: 'POST',
 
-              headers: {
-                'Content-Type':
-                  'application/x-www-form-urlencoded',
-              },
+            headers: {
+              'Content-Type':
+                'application/x-www-form-urlencoded',
+            },
 
-              body:
-                encoded.toString(),
-            }
-          );
+            body:
+              body.toString(),
+          });
 
         if (!response.ok) {
           throw new Error(
-            `Form submission failed: ${response.status}`
+            `Netlify returned ${response.status}`
           );
         }
 
@@ -375,7 +365,7 @@ export default function Contact() {
         );
       } catch (error) {
         console.error(
-          'Netlify form error:',
+          'Netlify form submission failed:',
           error
         );
 
@@ -391,11 +381,15 @@ export default function Contact() {
       id="contact"
       className="contact-final"
     >
+
       <div
         ref={stageRef}
         className="contact-final__stage"
       >
-        {/* BACKGROUND */}
+
+        {/* ================================================
+            BACKGROUND
+        ================================================= */}
 
         <div className="contact-final__lines">
           <span />
@@ -413,11 +407,17 @@ export default function Contact() {
           AS
         </div>
 
-        {/* SHELL */}
+
+        {/* ================================================
+            SHELL
+        ================================================= */}
 
         <div className="contact-final__shell">
 
-          {/* TOP */}
+
+          {/* ==============================================
+              TOP
+          =============================================== */}
 
           <div className="contact-final__top">
 
@@ -437,9 +437,13 @@ export default function Contact() {
 
           </div>
 
-          {/* MAIN */}
+
+          {/* ==============================================
+              MAIN
+          =============================================== */}
 
           <div className="contact-final__main">
+
 
             {/* LEFT */}
 
@@ -450,30 +454,35 @@ export default function Contact() {
               </span>
 
               <h2>
+
                 Have something
                 <br />
 
                 <span>
                   worth building?
                 </span>
+
               </h2>
 
               <p>
                 Tell me what you&apos;re
-                working on. Whether
-                it&apos;s a production
-                website, redesign,
-                portfolio or interactive
-                experience, we can figure
-                out the right way to
-                build it.
+                working on. Whether it&apos;s
+                a production website,
+                redesign, portfolio or
+                interactive experience,
+                we can figure out the right
+                way to build it.
               </p>
+
+
+              {/* DIRECT CONTACT */}
 
               <div className="contact-final__direct">
 
                 <a
                   href="mailto:m.Abdullah.tech.dev@gmail.com"
                 >
+
                   <Mail
                     strokeWidth={1.3}
                   />
@@ -481,13 +490,16 @@ export default function Contact() {
                   <span>
                     m.Abdullah.tech.dev@gmail.com
                   </span>
+
                 </a>
+
 
                 <a
                   href="https://wa.me/923247556451"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+
                   <MessageCircle
                     strokeWidth={1.3}
                   />
@@ -495,11 +507,14 @@ export default function Contact() {
                   <span>
                     WhatsApp
                   </span>
+
                 </a>
+
 
                 <a
                   href="tel:+923247556451"
                 >
+
                   <Phone
                     strokeWidth={1.3}
                   />
@@ -507,13 +522,17 @@ export default function Contact() {
                   <span>
                     +92 324 7556451
                   </span>
+
                 </a>
 
               </div>
 
             </div>
 
-            {/* FORM */}
+
+            {/* ==============================================
+                FORM
+            =============================================== */}
 
             <div className="contact-final__form-area">
 
@@ -529,8 +548,13 @@ export default function Contact() {
 
               </div>
 
+
               {formStatus ===
               'success' ? (
+
+                /* ==========================================
+                   SUCCESS
+                ========================================== */
 
                 <div className="contact-final__success">
 
@@ -547,9 +571,12 @@ export default function Contact() {
                   </span>
 
                   <h3>
+
                     Thanks.
                     <br />
+
                     I&apos;ll be in touch.
+
                   </h3>
 
                   <p>
@@ -560,11 +587,11 @@ export default function Contact() {
 
                   <button
                     type="button"
-                    onClick={() =>
+                    onClick={() => {
                       setFormStatus(
                         'idle'
-                      )
-                    }
+                      );
+                    }}
                   >
                     Send another message
                   </button>
@@ -573,10 +600,13 @@ export default function Contact() {
 
               ) : (
 
+                /* ==========================================
+                   FORM
+                ========================================== */
+
                 <form
                   name="project-enquiry"
                   method="POST"
-                  action="/netlify-form.html"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
                   className="contact-final__form"
@@ -585,25 +615,36 @@ export default function Contact() {
                   }
                 >
 
+                  {/* FORM NAME */}
+
                   <input
                     type="hidden"
                     name="form-name"
                     value="project-enquiry"
                   />
 
+
+                  {/* HONEYPOT */}
+
                   <p className="contact-final__honeypot">
 
                     <label>
-                      Do not fill this field
+
+                      Leave this field
+                      empty
 
                       <input
                         name="bot-field"
                         tabIndex="-1"
                         autoComplete="off"
                       />
+
                     </label>
 
                   </p>
+
+
+                  {/* NAME */}
 
                   <div className="contact-final__field">
 
@@ -624,6 +665,9 @@ export default function Contact() {
 
                   </div>
 
+
+                  {/* EMAIL */}
+
                   <div className="contact-final__field">
 
                     <label
@@ -642,6 +686,9 @@ export default function Contact() {
                     />
 
                   </div>
+
+
+                  {/* PROJECT TYPE */}
 
                   <div className="contact-final__field">
 
@@ -693,6 +740,9 @@ export default function Contact() {
 
                   </div>
 
+
+                  {/* MESSAGE */}
+
                   <div className="contact-final__field contact-final__field--message">
 
                     <label
@@ -711,6 +761,9 @@ export default function Contact() {
 
                   </div>
 
+
+                  {/* ERROR */}
+
                   {formStatus ===
                     'error' && (
 
@@ -726,6 +779,9 @@ export default function Contact() {
 
                   )}
 
+
+                  {/* SUBMIT */}
+
                   <button
                     type="submit"
                     className="contact-final__submit"
@@ -736,10 +792,12 @@ export default function Contact() {
                   >
 
                     <span>
+
                       {formStatus ===
                       'submitting'
                         ? 'Sending...'
                         : 'Send enquiry'}
+
                     </span>
 
                     <span className="contact-final__submit-icon">
@@ -760,7 +818,10 @@ export default function Contact() {
 
           </div>
 
-          {/* BOTTOM */}
+
+          {/* ==============================================
+              FOOTER
+          =============================================== */}
 
           <div className="contact-final__rule" />
 
@@ -777,6 +838,7 @@ export default function Contact() {
               </strong>
 
             </div>
+
 
             <div className="contact-final__footer-group">
 
@@ -814,6 +876,7 @@ export default function Contact() {
 
             </div>
 
+
             <div className="contact-final__footer-signature">
 
               <span>
@@ -829,7 +892,9 @@ export default function Contact() {
           </div>
 
         </div>
+
       </div>
+
     </section>
   );
 }
