@@ -1,6 +1,5 @@
 import {
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -9,772 +8,806 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import {
-  ArrowDownRight,
   ArrowUpRight,
-  GraduationCap,
+  Check,
+  Mail,
+  MessageCircle,
+  Phone,
 } from 'lucide-react';
 
-import '../styles/about.css';
+import '../styles/contact.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const experiences = [
-  {
-    id: '01',
-    company: 'CoreMint Labs',
-    role: 'Website Developer & SEO Specialist',
-    location: 'Remote',
-    date: 'Aug 2026 — Present',
-    description:
-      'Building and optimizing production websites for client businesses, combining responsive implementation with technical SEO, performance, usability and ongoing site management.',
-    details: [
-      'WordPress / Elementor / Astra',
-      'Technical & On-Page SEO',
-      'Responsive Development',
-      'Performance & Site Health',
-    ],
-  },
+export default function Contact() {
+  const stageRef = useRef(null);
+  const markRef = useRef(null);
 
-  {
-    id: '02',
-    company: 'Jupiter Advisers',
-    role: 'Web Developer',
-    location: 'Islamabad, Pakistan · Remote',
-    date: 'Apr 2026 — Present',
-    description:
-      'Developed and launched a production website for a visa consultancy while supporting lead-generation, assessment, webinar and marketing workflows across the platform.',
-    details: [
-      'Custom WordPress',
-      'Tailwind CSS / JavaScript',
-      'Lead & Assessment Flows',
-      'Cloudflare / DNS / cPanel',
-    ],
-  },
+  const [time, setTime] =
+    useState('');
 
-  {
-    id: '03',
-    company: 'DataMeld',
-    role: 'Web Developer & Digital Designer',
-    location: 'United Kingdom · Remote',
-    date: 'Nov 2024 — Feb 2025',
-    description:
-      'Delivered responsive websites and digital assets for a UK-based client, translating business requirements into practical interfaces across the complete delivery cycle.',
-    details: [
-      'Front-End Development',
-      'Responsive UI',
-      'Digital Design',
-      'Client Delivery',
-    ],
-  },
-];
-
-const skillGroups = [
-  {
-    id: '01',
-    title: 'Front-End Development',
-    description:
-      'Production interfaces built around responsiveness, maintainability and interaction.',
-    skills: [
-      'React',
-      'JavaScript',
-      'HTML',
-      'CSS',
-      'Tailwind CSS',
-      'GSAP',
-    ],
-  },
-
-  {
-    id: '02',
-    title: 'Creative & 3D Web',
-    description:
-      'Interactive browser experiences that use motion and real-time graphics with purpose.',
-    skills: [
-      'Three.js',
-      'React Three Fiber',
-      'WebGL',
-      'Interactive UI',
-      'Motion',
-    ],
-  },
-
-  {
-    id: '03',
-    title: 'CMS & Production',
-    description:
-      'Real client websites built, maintained and shipped across practical production platforms.',
-    skills: [
-      'WordPress',
-      'Elementor',
-      'Astra',
-      'Duda',
-      'Custom Themes',
-    ],
-  },
-
-  {
-    id: '04',
-    title: 'SEO & Performance',
-    description:
-      'Technical foundations that improve discovery, speed, structure and long-term site health.',
-    skills: [
-      'Technical SEO',
-      'On-Page SEO',
-      'Page Speed',
-      'Metadata',
-      'Internal Linking',
-      'Search Console',
-    ],
-  },
-
-  {
-    id: '05',
-    title: 'Web Operations',
-    description:
-      'The infrastructure work required to keep production websites available, secure and maintainable.',
-    skills: [
-      'Cloudflare',
-      'DNS',
-      'cPanel',
-      'GoDaddy',
-      'Deployments',
-      'Backups',
-    ],
-  },
-];
-
-export default function About() {
-  const sectionRef = useRef(null);
-  const portraitRef = useRef(null);
-  const progressRef = useRef(null);
-
-  const experienceRefs = useRef([]);
-  const skillRefs = useRef([]);
-
-  const [activeExperience, setActiveExperience] =
-    useState(0);
+  const [
+    formStatus,
+    setFormStatus,
+  ] = useState('idle');
 
   /* ========================================================
-     INTRO + GENERAL REVEALS
-  ======================================================== */
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.about-v1-reveal',
-        {
-          y: 50,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-
-          duration: 1,
-
-          stagger: 0.08,
-
-          ease: 'power4.out',
-
-          scrollTrigger: {
-            trigger: '.about-v1-intro',
-            start: 'top 78%',
-          },
-        }
-      );
-
-      gsap.fromTo(
-        '.about-v1-education',
-        {
-          y: 60,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-
-          duration: 1,
-
-          ease: 'power4.out',
-
-          scrollTrigger: {
-            trigger: '.about-v1-education',
-            start: 'top 82%',
-          },
-        }
-      );
-
-      gsap.fromTo(
-        '.about-v1-skills-heading > *',
-        {
-          y: 35,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-
-          duration: 0.9,
-
-          stagger: 0.08,
-
-          ease: 'power4.out',
-
-          scrollTrigger: {
-            trigger: '.about-v1-skills',
-            start: 'top 75%',
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  /* ========================================================
-     EXPERIENCE ACTIVATION
+     LOCAL TIME
   ======================================================== */
 
   useEffect(() => {
-    const triggers = [];
+    const formatter =
+      new Intl.DateTimeFormat(
+        'en-US',
+        {
+          timeZone:
+            'Asia/Karachi',
 
-    experienceRefs.current.forEach(
-      (element, index) => {
-        if (!element) return;
+          hour:
+            '2-digit',
 
-        const trigger = ScrollTrigger.create({
-          trigger: element,
+          minute:
+            '2-digit',
 
-          start: 'top 55%',
-          end: 'bottom 45%',
+          hour12:
+            true,
+        }
+      );
 
-          onEnter: () =>
-            setActiveExperience(index),
+    const updateTime = () => {
+      setTime(
+        formatter.format(
+          new Date()
+        )
+      );
+    };
 
-          onEnterBack: () =>
-            setActiveExperience(index),
-        });
+    updateTime();
 
-        triggers.push(trigger);
-
-        gsap.fromTo(
-          element,
-          {
-            y: 45,
-            opacity: 0.35,
-          },
-          {
-            y: 0,
-            opacity: 1,
-
-            duration: 1,
-
-            ease: 'power3.out',
-
-            scrollTrigger: {
-              trigger: element,
-              start: 'top 88%',
-            },
-          }
-        );
-      }
-    );
+    const interval =
+      window.setInterval(
+        updateTime,
+        30000
+      );
 
     return () => {
-      triggers.forEach((trigger) =>
-        trigger.kill()
+      window.clearInterval(
+        interval
       );
     };
   }, []);
 
   /* ========================================================
-     STICKY PROGRESS
+     ABOUT -> CONTACT REVEAL
   ======================================================== */
 
   useEffect(() => {
-    if (!progressRef.current) return;
+    const previousSection =
+      document.querySelector(
+        '.about-v1'
+      );
 
-    gsap.fromTo(
-      progressRef.current,
-      {
-        y: 10,
-        opacity: 0,
-      },
-      {
-        y: 0,
+    const stage =
+      stageRef.current;
+
+    if (
+      !previousSection ||
+      !stage
+    ) {
+      return;
+    }
+
+    gsap.set(stage, {
+      opacity: 0,
+
+      scale: 0.985,
+
+      filter:
+        'blur(10px)',
+
+      transformOrigin:
+        'center center',
+    });
+
+    const reveal =
+      gsap.to(stage, {
         opacity: 1,
 
-        duration: 0.35,
+        scale: 1,
 
-        ease: 'power3.out',
-      }
-    );
-  }, [activeExperience]);
-
-  /* ========================================================
-     PORTRAIT PARALLAX
-  ======================================================== */
-
-  useEffect(() => {
-    if (!portraitRef.current) return;
-
-    const tween = gsap.fromTo(
-      portraitRef.current,
-      {
-        yPercent: -4,
-      },
-      {
-        yPercent: 7,
+        filter:
+          'blur(0px)',
 
         ease: 'none',
 
         scrollTrigger: {
-          trigger: '.about-v1-experience',
-          start: 'top bottom',
-          end: 'bottom top',
+          trigger:
+            previousSection,
 
-          scrub: 1.5,
+          start:
+            'bottom bottom',
+
+          end:
+            'bottom top',
+
+          scrub: 1,
+
+          invalidateOnRefresh:
+            true,
         },
-      }
-    );
+      });
+
+    const markAnimation =
+      gsap.fromTo(
+        markRef.current,
+        {
+          yPercent: 10,
+        },
+        {
+          yPercent: -4,
+
+          ease: 'none',
+
+          scrollTrigger: {
+            trigger:
+              previousSection,
+
+            start:
+              'bottom bottom',
+
+            end:
+              'bottom top',
+
+            scrub: 1.5,
+          },
+        }
+      );
+
+    ScrollTrigger.refresh();
 
     return () => {
-      tween.kill();
+      reveal.kill();
+
+      markAnimation.kill();
     };
   }, []);
 
   /* ========================================================
-     SKILLS REVEAL
+     SUBTLE BACKGROUND DEPTH
   ======================================================== */
 
   useEffect(() => {
-    const animations = [];
+    const stage =
+      stageRef.current;
 
-    skillRefs.current.forEach(
-      (element, index) => {
-        if (!element) return;
+    const mark =
+      markRef.current;
 
-        const animation = gsap.fromTo(
-          element,
-          {
-            y: 45,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
+    if (!stage || !mark) {
+      return;
+    }
 
-            duration: 0.85,
+    const moveX =
+      gsap.quickTo(
+        mark,
+        'x',
+        {
+          duration: 1.5,
+          ease: 'power3.out',
+        }
+      );
 
-            delay: index * 0.03,
+    const moveY =
+      gsap.quickTo(
+        mark,
+        'y',
+        {
+          duration: 1.5,
+          ease: 'power3.out',
+        }
+      );
 
-            ease: 'power3.out',
-
-            scrollTrigger: {
-              trigger: element,
-              start: 'top 90%',
-            },
-          }
-        );
-
-        animations.push(animation);
+    const handleMove = (
+      event
+    ) => {
+      if (
+        window.innerWidth <=
+        900
+      ) {
+        return;
       }
+
+      const rect =
+        stage.getBoundingClientRect();
+
+      const x =
+        (event.clientX -
+          rect.left) /
+          rect.width -
+        0.5;
+
+      const y =
+        (event.clientY -
+          rect.top) /
+          rect.height -
+        0.5;
+
+      moveX(x * 18);
+      moveY(y * 10);
+    };
+
+    const reset = () => {
+      moveX(0);
+      moveY(0);
+    };
+
+    stage.addEventListener(
+      'pointermove',
+      handleMove
+    );
+
+    stage.addEventListener(
+      'pointerleave',
+      reset
     );
 
     return () => {
-      animations.forEach((animation) =>
-        animation.kill()
+      stage.removeEventListener(
+        'pointermove',
+        handleMove
+      );
+
+      stage.removeEventListener(
+        'pointerleave',
+        reset
       );
     };
   }, []);
 
+  /* ========================================================
+     NETLIFY FORM SUBMISSION
+  ======================================================== */
+
+  const handleSubmit =
+    async (event) => {
+      event.preventDefault();
+
+      if (
+        formStatus ===
+        'submitting'
+      ) {
+        return;
+      }
+
+      const form =
+        event.currentTarget;
+
+      const formData =
+        new FormData(form);
+
+      /*
+       * Explicitly guarantee Netlify receives
+       * the exact registered form name.
+       */
+      formData.set(
+        'form-name',
+        'project-enquiry'
+      );
+
+      const encoded =
+        new URLSearchParams();
+
+      formData.forEach(
+        (value, key) => {
+          encoded.append(
+            key,
+            String(value)
+          );
+        }
+      );
+
+      setFormStatus(
+        'submitting'
+      );
+
+      try {
+        const response =
+          await fetch(
+            '/netlify-form.html',
+            {
+              method: 'POST',
+
+              headers: {
+                'Content-Type':
+                  'application/x-www-form-urlencoded',
+              },
+
+              body:
+                encoded.toString(),
+            }
+          );
+
+        if (!response.ok) {
+          throw new Error(
+            `Form submission failed: ${response.status}`
+          );
+        }
+
+        form.reset();
+
+        setFormStatus(
+          'success'
+        );
+      } catch (error) {
+        console.error(
+          'Netlify form error:',
+          error
+        );
+
+        setFormStatus(
+          'error'
+        );
+      }
+    };
+
   return (
     <section
-      ref={sectionRef}
-      id="about"
-      className="about-v1"
+      id="contact"
+      className="contact-final"
     >
-      {/* =====================================================
-          INTRO
-      ===================================================== */}
+      <div
+        ref={stageRef}
+        className="contact-final__stage"
+      >
+        {/* BACKGROUND */}
 
-      <div className="about-v1-intro">
-
-        <div className="about-v1-intro-meta about-v1-reveal">
-
-          <span>
-            About / Experience
-          </span>
-
-          <span>
-            2024 — Present
-          </span>
-
+        <div className="contact-final__lines">
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
         </div>
 
-        <div className="about-v1-intro-grid">
-
-          <h2 className="about-v1-reveal">
-            I work where
-            <br />
-            <span>
-              design, code
-            </span>
-            <br />
-            and execution meet.
-          </h2>
-
-          <div className="about-v1-intro-copy about-v1-reveal">
-
-            <ArrowDownRight
-              strokeWidth={1.25}
-            />
-
-            <p>
-              I&apos;m Abdullah Shah, a developer
-              focused on building digital experiences
-              that are visually considered,
-              technically reliable and ready for
-              production.
-            </p>
-
-            <p>
-              My work moves between creative
-              front-end development, WordPress,
-              interactive 3D, technical SEO,
-              performance and the infrastructure
-              behind real websites.
-            </p>
-
-          </div>
-
+        <div
+          ref={markRef}
+          className="contact-final__mark"
+          aria-hidden="true"
+        >
+          AS
         </div>
 
-      </div>
+        {/* SHELL */}
 
-      {/* =====================================================
-          EXPERIENCE
-      ===================================================== */}
+        <div className="contact-final__shell">
 
-      <div className="about-v1-experience">
+          {/* TOP */}
 
-        {/* STICKY SIDE */}
+          <div className="contact-final__top">
 
-        <aside className="about-v1-profile">
+            <div className="contact-final__availability">
 
-          <div className="about-v1-profile-sticky">
+              <span className="contact-final__status" />
 
-            <div className="about-v1-profile-image">
-
-              <div
-                ref={portraitRef}
-                className="about-v1-profile-image-inner"
-              >
-                <img
-                  src="/abdullah-hero.png"
-                  alt="Abdullah Shah"
-                />
-              </div>
+              <span>
+                Available for selected projects
+              </span>
 
             </div>
 
-            <div className="about-v1-profile-bottom">
+            <span className="contact-final__location">
+              Pakistan / Worldwide
+            </span>
 
-              <div className="about-v1-profile-name">
+          </div>
 
-                <strong>
-                  Abdullah Shah
-                </strong>
+          {/* MAIN */}
+
+          <div className="contact-final__main">
+
+            {/* LEFT */}
+
+            <div className="contact-final__intro">
+
+              <span className="contact-final__label">
+                Contact / Start a project
+              </span>
+
+              <h2>
+                Have something
+                <br />
 
                 <span>
-                  Creative Developer
+                  worth building?
                 </span>
+              </h2>
 
-              </div>
+              <p>
+                Tell me what you&apos;re
+                working on. Whether
+                it&apos;s a production
+                website, redesign,
+                portfolio or interactive
+                experience, we can figure
+                out the right way to
+                build it.
+              </p>
 
-              <div className="about-v1-profile-index">
+              <div className="contact-final__direct">
 
-                <span
-                  ref={progressRef}
-                  key={activeExperience}
+                <a
+                  href="mailto:m.Abdullah.tech.dev@gmail.com"
                 >
-                  {experiences[
-                    activeExperience
-                  ].id}
-                </span>
-
-                <span>
-                  / {String(
-                    experiences.length
-                  ).padStart(2, '0')}
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </aside>
-
-        {/* EXPERIENCE LIST */}
-
-        <div className="about-v1-experience-list">
-
-          <div className="about-v1-section-heading">
-
-            <span>
-              Experience
-            </span>
-
-            <span>
-              Selected professional work
-            </span>
-
-          </div>
-
-          {experiences.map(
-            (experience, index) => (
-              <article
-                key={experience.company}
-                ref={(element) => {
-                  experienceRefs.current[
-                    index
-                  ] = element;
-                }}
-                className={`about-v1-role ${
-                  activeExperience === index
-                    ? 'is-active'
-                    : ''
-                }`}
-              >
-
-                <div className="about-v1-role-top">
-
-                  <span className="about-v1-role-number">
-                    {experience.id}
-                  </span>
-
-                  <span className="about-v1-role-date">
-                    {experience.date}
-                  </span>
-
-                </div>
-
-                <h3>
-                  {experience.company}
-                </h3>
-
-                <div className="about-v1-role-position">
-
-                  <span>
-                    {experience.role}
-                  </span>
-
-                  <span>
-                    {experience.location}
-                  </span>
-
-                </div>
-
-                <p>
-                  {experience.description}
-                </p>
-
-                <div className="about-v1-role-details">
-
-                  {experience.details.map(
-                    (detail) => (
-                      <span key={detail}>
-                        {detail}
-                      </span>
-                    )
-                  )}
-
-                </div>
-
-              </article>
-            )
-          )}
-
-        </div>
-
-      </div>
-
-      {/* =====================================================
-          EDUCATION
-      ===================================================== */}
-
-      <div className="about-v1-education">
-
-        <div className="about-v1-education-icon">
-
-          <GraduationCap
-            strokeWidth={1.25}
-          />
-
-        </div>
-
-        <div className="about-v1-education-main">
-
-          <span className="about-v1-education-label">
-            Education
-          </span>
-
-          <h3>
-            Bachelor of Science in
-            <br />
-            Information Technology
-          </h3>
-
-          <div className="about-v1-education-university">
-
-            <strong>
-              University of Mianwali
-            </strong>
-
-            <span>
-              2021 — 2025
-            </span>
-
-          </div>
-
-        </div>
-
-        <div className="about-v1-education-result">
-
-          <span>
-            CGPA
-          </span>
-
-          <strong>
-            3.85
-          </strong>
-
-          <small>
-            / 4.00
-          </small>
-
-        </div>
-
-        <div className="about-v1-education-award">
-
-          <span>
-            Recognition
-          </span>
-
-          <strong>
-            University Gold Medalist
-          </strong>
-
-        </div>
-
-      </div>
-
-      {/* =====================================================
-          SKILLS
-      ===================================================== */}
-
-      <div className="about-v1-skills">
-
-        <div className="about-v1-skills-heading">
-
-          <span>
-            Capabilities / Stack
-          </span>
-
-          <h2>
-            Tools change.
-            <br />
-            <span>
-              The standard doesn&apos;t.
-            </span>
-          </h2>
-
-          <p>
-            I choose technology around the
-            experience, the business problem and
-            what needs to survive in production.
-          </p>
-
-        </div>
-
-        <div className="about-v1-skills-list">
-
-          {skillGroups.map(
-            (group, index) => (
-              <article
-                key={group.title}
-                ref={(element) => {
-                  skillRefs.current[
-                    index
-                  ] = element;
-                }}
-                className="about-v1-skill"
-              >
-
-                <span className="about-v1-skill-number">
-                  {group.id}
-                </span>
-
-                <div className="about-v1-skill-title">
-
-                  <h3>
-                    {group.title}
-                  </h3>
-
-                  <ArrowUpRight
-                    strokeWidth={1.2}
+                  <Mail
+                    strokeWidth={1.3}
                   />
 
+                  <span>
+                    m.Abdullah.tech.dev@gmail.com
+                  </span>
+                </a>
+
+                <a
+                  href="https://wa.me/923247556451"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle
+                    strokeWidth={1.3}
+                  />
+
+                  <span>
+                    WhatsApp
+                  </span>
+                </a>
+
+                <a
+                  href="tel:+923247556451"
+                >
+                  <Phone
+                    strokeWidth={1.3}
+                  />
+
+                  <span>
+                    +92 324 7556451
+                  </span>
+                </a>
+
+              </div>
+
+            </div>
+
+            {/* FORM */}
+
+            <div className="contact-final__form-area">
+
+              <div className="contact-final__form-heading">
+
+                <span>
+                  Project enquiry
+                </span>
+
+                <span>
+                  01 — 04
+                </span>
+
+              </div>
+
+              {formStatus ===
+              'success' ? (
+
+                <div className="contact-final__success">
+
+                  <span className="contact-final__success-icon">
+
+                    <Check
+                      strokeWidth={1.4}
+                    />
+
+                  </span>
+
+                  <span>
+                    Message received
+                  </span>
+
+                  <h3>
+                    Thanks.
+                    <br />
+                    I&apos;ll be in touch.
+                  </h3>
+
+                  <p>
+                    Your project enquiry
+                    has been sent
+                    successfully.
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFormStatus(
+                        'idle'
+                      )
+                    }
+                  >
+                    Send another message
+                  </button>
+
                 </div>
 
-                <p>
-                  {group.description}
-                </p>
+              ) : (
 
-                <div className="about-v1-skill-stack">
+                <form
+                  name="project-enquiry"
+                  method="POST"
+                  action="/netlify-form.html"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  className="contact-final__form"
+                  onSubmit={
+                    handleSubmit
+                  }
+                >
 
-                  {group.skills.map(
-                    (skill) => (
-                      <span key={skill}>
-                        {skill}
-                      </span>
-                    )
+                  <input
+                    type="hidden"
+                    name="form-name"
+                    value="project-enquiry"
+                  />
+
+                  <p className="contact-final__honeypot">
+
+                    <label>
+                      Do not fill this
+                      field
+
+                      <input
+                        name="bot-field"
+                        tabIndex="-1"
+                        autoComplete="off"
+                      />
+                    </label>
+
+                  </p>
+
+                  {/* NAME */}
+
+                  <div className="contact-final__field">
+
+                    <label
+                      htmlFor="contact-name"
+                    >
+                      Your name
+                    </label>
+
+                    <input
+                      id="contact-name"
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      autoComplete="name"
+                      required
+                    />
+
+                  </div>
+
+                  {/* EMAIL */}
+
+                  <div className="contact-final__field">
+
+                    <label
+                      htmlFor="contact-email"
+                    >
+                      Your email
+                    </label>
+
+                    <input
+                      id="contact-email"
+                      type="email"
+                      name="email"
+                      placeholder="Email address"
+                      autoComplete="email"
+                      required
+                    />
+
+                  </div>
+
+                  {/* PROJECT TYPE */}
+
+                  <div className="contact-final__field">
+
+                    <label
+                      htmlFor="contact-project"
+                    >
+                      What are we building?
+                    </label>
+
+                    <select
+                      id="contact-project"
+                      name="projectType"
+                      defaultValue=""
+                      required
+                    >
+
+                      <option
+                        value=""
+                        disabled
+                      >
+                        Select project type
+                      </option>
+
+                      <option value="Website">
+                        Website
+                      </option>
+
+                      <option value="Website Redesign">
+                        Website redesign
+                      </option>
+
+                      <option value="Interactive / 3D">
+                        Interactive / 3D
+                      </option>
+
+                      <option value="Portfolio">
+                        Portfolio
+                      </option>
+
+                      <option value="SEO / Performance">
+                        SEO / Performance
+                      </option>
+
+                      <option value="Other">
+                        Something else
+                      </option>
+
+                    </select>
+
+                  </div>
+
+                  {/* MESSAGE */}
+
+                  <div className="contact-final__field contact-final__field--message">
+
+                    <label
+                      htmlFor="contact-message"
+                    >
+                      Tell me about it
+                    </label>
+
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      placeholder="A few details about the project, goals and what you need."
+                      rows="3"
+                      required
+                    />
+
+                  </div>
+
+                  {/* ERROR */}
+
+                  {formStatus ===
+                    'error' && (
+
+                    <p
+                      className="contact-final__error"
+                      role="alert"
+                    >
+                      Something went
+                      wrong. Please try
+                      again or contact me
+                      directly by email.
+                    </p>
+
                   )}
 
-                </div>
+                  {/* SUBMIT */}
 
-              </article>
-            )
-          )}
+                  <button
+                    type="submit"
+                    className="contact-final__submit"
+                    disabled={
+                      formStatus ===
+                      'submitting'
+                    }
+                  >
+
+                    <span>
+                      {formStatus ===
+                      'submitting'
+                        ? 'Sending...'
+                        : 'Send enquiry'}
+                    </span>
+
+                    <span className="contact-final__submit-icon">
+
+                      <ArrowUpRight
+                        strokeWidth={1.4}
+                      />
+
+                    </span>
+
+                  </button>
+
+                </form>
+
+              )}
+
+            </div>
+
+          </div>
+
+          {/* FOOTER */}
+
+          <div className="contact-final__rule" />
+
+          <div className="contact-final__footer">
+
+            <div className="contact-final__footer-group">
+
+              <span>
+                Local time
+              </span>
+
+              <strong>
+                {time} PKT
+              </strong>
+
+            </div>
+
+            <div className="contact-final__footer-group">
+
+              <span>
+                Socials
+              </span>
+
+              <nav>
+
+                <a
+                  href="https://www.linkedin.com/in/mabdullahshahd/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+
+                <a
+                  href="https://github.com/ibtikarzofficial-eng"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+
+                <a
+                  href="https://www.instagram.com/abdullah_shahg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Instagram
+                </a>
+
+              </nav>
+
+            </div>
+
+            <div className="contact-final__footer-signature">
+
+              <span>
+                © 2026
+              </span>
+
+              <strong>
+                Abdullah Shah
+              </strong>
+
+            </div>
+
+          </div>
 
         </div>
 
       </div>
-
-      {/* =====================================================
-          END STATEMENT
-      ===================================================== */}
-
-      <div className="about-v1-ending">
-
-        <span>
-          Approach
-        </span>
-
-        <p>
-          Make it distinctive.
-          <br />
-          Make it useful.
-          <br />
-          <strong>
-            Make it work.
-          </strong>
-        </p>
-
-      </div>
-
     </section>
   );
 }
