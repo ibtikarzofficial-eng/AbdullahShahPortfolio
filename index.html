@@ -1,0 +1,196 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <!-- =====================================================
+       BASIC SEO
+  ====================================================== -->
+
+  <title>
+    Abdullah Shah — Creative Developer
+  </title>
+
+  <meta
+    name="description"
+    content="Portfolio of Abdullah Shah, a creative developer building production websites, interactive digital experiences and 3D web projects."
+  />
+
+  <meta
+    name="author"
+    content="Abdullah Shah"
+  />
+
+  <meta
+    name="robots"
+    content="index, follow"
+  />
+
+  <meta
+    name="theme-color"
+    content="#e7e9eb"
+  />
+
+
+  <!-- =====================================================
+       OPEN GRAPH
+  ====================================================== -->
+
+  <meta
+    property="og:type"
+    content="website"
+  />
+
+  <meta
+    property="og:title"
+    content="Abdullah Shah — Creative Developer"
+  />
+
+  <meta
+    property="og:description"
+    content="Production websites, creative development and interactive 3D experiences."
+  />
+
+  <meta
+    property="og:image"
+    content="/abdullah-hero.png"
+  />
+
+
+  <!-- =====================================================
+       TWITTER / SOCIAL CARDS
+  ====================================================== -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <meta
+    name="twitter:title"
+    content="Abdullah Shah — Creative Developer"
+  />
+
+  <meta
+    name="twitter:description"
+    content="Production websites, creative development and interactive 3D experiences."
+  />
+
+  <meta
+    name="twitter:image"
+    content="/abdullah-hero.png"
+  />
+
+
+  <!-- =====================================================
+       FAVICON
+  ====================================================== -->
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/favicon.svg"
+  />
+
+</head>
+
+
+<body>
+
+  <!-- =====================================================
+       NETLIFY FORM REGISTRATION
+
+       Netlify scans generated/static HTML during deployment.
+
+       Our actual visible form lives inside Contact.jsx.
+       This hidden version registers the fields with Netlify.
+  ====================================================== -->
+
+  <form
+    name="project-enquiry"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    hidden
+  >
+
+    <input
+      type="hidden"
+      name="form-name"
+      value="project-enquiry"
+    />
+
+    <input
+      name="bot-field"
+    />
+
+    <input
+      type="text"
+      name="name"
+    />
+
+    <input
+      type="email"
+      name="email"
+    />
+
+    <select
+      name="projectType"
+    >
+
+      <option value="Website">
+        Website
+      </option>
+
+      <option value="Website Redesign">
+        Website Redesign
+      </option>
+
+      <option value="Interactive / 3D">
+        Interactive / 3D
+      </option>
+
+      <option value="Portfolio">
+        Portfolio
+      </option>
+
+      <option value="SEO / Performance">
+        SEO / Performance
+      </option>
+
+      <option value="Other">
+        Other
+      </option>
+
+    </select>
+
+    <textarea
+      name="message"
+    ></textarea>
+
+  </form>
+
+
+  <!-- =====================================================
+       REACT ROOT
+  ====================================================== -->
+
+  <div id="root"></div>
+
+
+  <script
+    type="module"
+    src="/src/main.jsx"
+  ></script>
+
+</body>
+
+</html>

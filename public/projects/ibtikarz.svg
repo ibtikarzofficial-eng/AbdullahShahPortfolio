@@ -1,0 +1,12 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="760" rx="40" fill="#ECEEEF"/>
+<rect x="76" y="78" width="1048" height="604" rx="24" fill="#F8F9F9"/>
+<text x="108" y="130" fill="#171719" font-family="Arial" font-size="22" font-weight="700">IBTIKARZ</text>
+<text x="108" y="245" fill="#171719" font-family="Arial" font-size="62" font-weight="700">Experiences,</text>
+<text x="108" y="312" fill="#171719" font-family="Arial" font-size="62" font-weight="700">not pages.</text>
+<circle cx="850" cy="355" r="165" fill="#171719"/>
+<circle cx="914" cy="318" r="118" stroke="#E7E7E7" stroke-width="2"/>
+<circle cx="914" cy="318" r="74" stroke="#E7E7E7" stroke-width="2"/>
+<path d="M808 355C880 300 960 310 1024 372" stroke="#F5F5F2" stroke-width="3"/>
+<text x="108" y="455" fill="#676B70" font-family="Arial" font-size="22">Creative web development · 3D · Interaction</text>
+</svg>

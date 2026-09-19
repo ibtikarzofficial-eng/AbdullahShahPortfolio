@@ -1,0 +1,11 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="760" rx="40" fill="#EDE4DF"/>
+<rect x="76" y="78" width="1048" height="604" rx="24" fill="#F8F5F2"/>
+<rect x="76" y="78" width="1048" height="64" rx="24" fill="#FFFFFF"/>
+<circle cx="116" cy="110" r="7" fill="#D7CBC3"/><circle cx="140" cy="110" r="7" fill="#D7CBC3"/><circle cx="164" cy="110" r="7" fill="#D7CBC3"/>
+<text x="112" y="214" fill="#171719" font-family="Arial" font-size="30" font-weight="700">PICAZO'S FLOWERS</text>
+<text x="112" y="276" fill="#171719" font-family="Arial" font-size="64" font-weight="700">Flowers for moments</text>
+<text x="112" y="342" fill="#171719" font-family="Arial" font-size="64" font-weight="700">worth remembering.</text>
+<rect x="112" y="398" width="180" height="54" rx="27" fill="#171719"/><text x="155" y="433" fill="white" font-family="Arial" font-size="18">Explore work</text>
+<circle cx="894" cy="382" r="170" fill="#D39C95"/><circle cx="964" cy="312" r="120" fill="#E7B6AE"/><circle cx="832" cy="310" r="100" fill="#F3C9C0"/><path d="M780 515C846 424 928 406 1022 464" stroke="#5E6B53" stroke-width="22" stroke-linecap="round"/>
+</svg>

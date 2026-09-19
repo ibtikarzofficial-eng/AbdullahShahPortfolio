@@ -1,0 +1,1196 @@
+/* ==========================================================
+   WORK
+========================================================== */
+
+.work-v8 {
+  --work-bg: #ffffff;
+  --work-text: #17181a;
+  --work-muted: #888d92;
+  --work-soft: #a0a4a8;
+
+  --work-line:
+    rgba(23, 24, 26, 0.13);
+
+  --work-blue: #4165e8;
+
+  position: relative;
+  z-index: 20;
+
+  padding:
+    clamp(8rem, 12vw, 13rem)
+    0
+    clamp(10rem, 15vw, 16rem);
+
+  overflow: clip;
+
+  background: var(--work-bg);
+  color: var(--work-text);
+}
+
+
+/* ==========================================================
+   INTRO
+========================================================== */
+
+.work-v8-intro {
+  width:
+    min(
+      calc(100% - 6rem),
+      1480px
+    );
+
+  margin:
+    0 auto
+    clamp(9rem, 14vw, 15rem);
+}
+
+
+.work-v8-intro-top {
+  padding-bottom: 1.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  border-bottom:
+    1px solid
+    var(--work-line);
+
+  color: var(--work-muted);
+
+  font-size: 0.61rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.15em;
+}
+
+
+.work-v8-intro-grid {
+  margin-top:
+    clamp(3.5rem, 6vw, 6rem);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(16rem, 0.35fr);
+
+  align-items: end;
+
+  gap:
+    clamp(4rem, 8vw, 10rem);
+}
+
+
+.work-v8-intro h2 {
+  margin: 0;
+
+  font-size:
+    clamp(4rem, 7.4vw, 8.8rem);
+
+  font-weight: 400;
+
+  line-height: 0.91;
+
+  letter-spacing: -0.078em;
+}
+
+
+.work-v8-intro h2 span {
+  color: var(--work-soft);
+}
+
+
+.work-v8-intro-copy {
+  max-width: 21rem;
+}
+
+
+.work-v8-intro-copy svg {
+  width: 2rem;
+  height: 2rem;
+
+  margin-bottom: 2rem;
+}
+
+
+.work-v8-intro-copy p {
+  margin: 0;
+
+  color: #64696e;
+
+  font-size:
+    clamp(0.95rem, 1.15vw, 1.12rem);
+
+  line-height: 1.58;
+
+  letter-spacing: -0.025em;
+}
+
+
+/* ==========================================================
+   COUNTER
+========================================================== */
+
+.work-v8-counter {
+  position: sticky;
+
+  z-index: 50;
+
+  top: 1.4rem;
+
+  width: max-content;
+
+  margin:
+    0
+    0
+    -3rem
+    1.5rem;
+
+  padding:
+    0.68rem
+    0.85rem;
+
+  display: flex;
+  align-items: baseline;
+
+  gap: 0.28rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(23, 24, 26, 0.92);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0.7rem 2.2rem
+    rgba(0, 0, 0, 0.12);
+
+  pointer-events: none;
+}
+
+
+.work-v8-counter > span {
+  margin-right: 0.55rem;
+
+  color:
+    rgba(255, 255, 255, 0.48);
+
+  font-size: 0.49rem;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.12em;
+}
+
+
+.work-v8-counter strong {
+  font-size: 0.74rem;
+
+  font-weight: 600;
+
+  animation:
+    workCounterChange
+    0.3s
+    ease;
+}
+
+
+.work-v8-counter small {
+  color:
+    rgba(255, 255, 255, 0.4);
+
+  font-size: 0.53rem;
+}
+
+
+@keyframes workCounterChange {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* ==========================================================
+   PROJECT STACK
+========================================================== */
+
+.work-v8-projects {
+  width:
+    min(
+      calc(100% - 3rem),
+      1580px
+    );
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap:
+    clamp(10rem, 15vw, 17rem);
+}
+
+
+.work-v8-project {
+  position: relative;
+
+  perspective: 1600px;
+}
+
+
+/* ==========================================================
+   ART-DIRECTED WIDTHS
+========================================================== */
+
+.work-v8-project--wide
+.work-v8-visual {
+  width: 100%;
+}
+
+
+.work-v8-project--offset-right
+.work-v8-visual {
+  width: 88%;
+
+  margin-left: auto;
+}
+
+
+.work-v8-project--offset-left
+.work-v8-visual {
+  width: 88%;
+
+  margin-right: auto;
+}
+
+
+/* ==========================================================
+   VISUAL
+========================================================== */
+
+.work-v8-visual {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  max-height: 55rem;
+
+  overflow: hidden;
+
+  border-radius:
+    clamp(0.55rem, 1vw, 1rem);
+
+  background: #e5e6e8;
+
+  box-shadow:
+    0
+    2.2rem
+    6rem
+    rgba(0, 0, 0, 0.09);
+
+  transform-style: preserve-3d;
+
+  will-change: transform;
+}
+
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+.work-v8-image {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+}
+
+
+.work-v8-image img {
+  position: absolute;
+
+  z-index: 1;
+
+  left: -1.5%;
+  top: -4%;
+
+  width: 103%;
+  height: 108%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  will-change: transform;
+}
+
+
+/* Jupiter already has a framed browser presentation */
+
+.work-v8-project--jupiter
+.work-v8-image {
+  background: #121514;
+}
+
+
+.work-v8-project--jupiter
+.work-v8-image img {
+  object-position:
+    center center;
+}
+
+
+/* Picazo has strong upper-right negative space */
+
+.work-v8-project--picazos
+.work-v8-image {
+  background: #dedede;
+}
+
+
+.work-v8-project--picazos
+.work-v8-image img {
+  object-position:
+    center 52%;
+}
+
+
+/* IbtikarZ is already angled and dynamic */
+
+.work-v8-project--ibtikarz
+.work-v8-image {
+  background: #eeeeee;
+}
+
+
+.work-v8-project--ibtikarz
+.work-v8-image img {
+  object-position:
+    center center;
+}
+
+
+/* 3D portfolio */
+
+.work-v8-project--photography
+.work-v8-image {
+  background: #ededed;
+}
+
+
+.work-v8-project--photography
+.work-v8-image img {
+  object-position:
+    center center;
+}
+
+
+/* ==========================================================
+   IMAGE OVERLAY
+========================================================== */
+
+.work-v8-image-overlay {
+  position: absolute;
+
+  z-index: 2;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.12),
+      transparent 25%,
+      transparent 67%,
+      rgba(0, 0, 0, 0.16)
+    );
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================
+   VISUAL META
+========================================================== */
+
+.work-v8-visual-meta {
+  position: absolute;
+
+  z-index: 5;
+
+  left:
+    clamp(1rem, 2vw, 2rem);
+
+  right:
+    clamp(1rem, 2vw, 2rem);
+
+  top:
+    clamp(1rem, 2vw, 2rem);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  color: #ffffff;
+
+  font-size: 0.57rem;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.14em;
+
+  mix-blend-mode: difference;
+}
+
+
+/* ==========================================================
+   LIVE
+========================================================== */
+
+.work-v8-live {
+  position: absolute;
+
+  z-index: 5;
+
+  left:
+    clamp(1rem, 2vw, 2rem);
+
+  bottom:
+    clamp(1rem, 2vw, 2rem);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.6rem;
+
+  color: #ffffff;
+
+  font-size: 0.59rem;
+
+  font-weight: 500;
+
+  mix-blend-mode: difference;
+}
+
+
+.work-v8-live-dot {
+  position: relative;
+
+  width: 0.45rem;
+  height: 0.45rem;
+
+  border-radius: 50%;
+
+  background: #4fd281;
+}
+
+
+.work-v8-live-dot::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -0.3rem;
+
+  border:
+    1px solid
+    rgba(79, 210, 129, 0.42);
+
+  border-radius: 50%;
+
+  animation:
+    workLivePulse
+    2.3s
+    ease-out
+    infinite;
+}
+
+
+@keyframes workLivePulse {
+
+  0% {
+    opacity: 1;
+
+    transform:
+      scale(0.7);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      scale(1.7);
+  }
+
+}
+
+
+/* ==========================================================
+   PROJECT NUMBER
+========================================================== */
+
+.work-v8-number {
+  position: absolute;
+
+  z-index: 5;
+
+  right:
+    clamp(1rem, 2.4vw, 2.5rem);
+
+  bottom:
+    clamp(0.8rem, 1.8vw, 1.6rem);
+
+  color:
+    rgba(255, 255, 255, 0.82);
+
+  font-size:
+    clamp(5rem, 11vw, 12rem);
+
+  font-weight: 300;
+
+  line-height: 0.8;
+
+  letter-spacing: -0.09em;
+
+  mix-blend-mode: difference;
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================
+   IMAGE BORDER
+========================================================== */
+
+.work-v8-visual::after {
+  content: "";
+
+  position: absolute;
+
+  z-index: 8;
+
+  inset: 0;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0);
+
+  border-radius: inherit;
+
+  pointer-events: none;
+
+  transition:
+    border-color
+    0.4s ease;
+}
+
+
+.work-v8-visual:hover::after {
+  border-color:
+    rgba(255, 255, 255, 0.28);
+}
+
+
+/* ==========================================================
+   INFO
+========================================================== */
+
+.work-v8-info {
+  padding:
+    clamp(1.8rem, 3vw, 3rem)
+    0
+    0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(19rem, 0.46fr);
+
+  align-items: start;
+
+  gap:
+    clamp(3rem, 7vw, 8rem);
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.work-v8-eyebrow {
+  display: block;
+
+  margin-bottom: 1rem;
+
+  color: var(--work-muted);
+
+  font-size: 0.58rem;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.14em;
+}
+
+
+.work-v8-title h3 {
+  margin: 0;
+
+  font-size:
+    clamp(3rem, 5.8vw, 7rem);
+
+  font-weight: 400;
+
+  line-height: 0.9;
+
+  letter-spacing: -0.075em;
+}
+
+
+.work-v8-context {
+  display: block;
+
+  margin-top: 1rem;
+
+  color: var(--work-muted);
+
+  font-size: 0.65rem;
+
+  font-weight: 500;
+}
+
+
+/* ==========================================================
+   DETAILS
+========================================================== */
+
+.work-v8-details {
+  padding-top: 0.3rem;
+}
+
+
+.work-v8-details > p {
+  max-width: 30rem;
+
+  margin: 0;
+
+  color: #64696e;
+
+  font-size:
+    clamp(0.9rem, 1vw, 1.03rem);
+
+  line-height: 1.6;
+
+  letter-spacing: -0.022em;
+}
+
+
+/* ==========================================================
+   SERVICES
+========================================================== */
+
+.work-v8-services {
+  margin-top: 1.8rem;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap:
+    0.55rem
+    1.2rem;
+}
+
+
+.work-v8-services span {
+  position: relative;
+
+  padding-left: 0.82rem;
+
+  color: #777c81;
+
+  font-size: 0.66rem;
+
+  font-weight: 500;
+}
+
+
+.work-v8-services span::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 50%;
+
+  width: 3px;
+  height: 3px;
+
+  transform:
+    translateY(-50%);
+
+  border-radius: 50%;
+
+  background: var(--work-blue);
+}
+
+
+/* ==========================================================
+   LIVE LINK
+========================================================== */
+
+.work-v8-link {
+  margin-top: 2rem;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.55rem;
+
+  padding-bottom: 0.3rem;
+
+  border-bottom:
+    1px solid
+    rgba(23, 24, 26, 0.52);
+
+  font-size: 0.7rem;
+
+  font-weight: 600;
+}
+
+
+.work-v8-link svg {
+  width: 0.9rem;
+
+  transition:
+    transform
+    0.4s
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.work-v8-link:hover svg {
+  transform:
+    translate(4px, -4px);
+}
+
+
+/* ==========================================================
+   CUSTOM CURSOR
+========================================================== */
+
+.work-v8-cursor {
+  position: fixed;
+
+  z-index: 9999;
+
+  left: 0;
+  top: 0;
+
+  width: 6.5rem;
+  height: 6.5rem;
+
+  translate:
+    -50% -50%;
+
+  scale: 0.55;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.4rem;
+
+  border-radius: 50%;
+
+  background: var(--work-blue);
+
+  color: #ffffff;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  font-size: 0.71rem;
+
+  box-shadow:
+    0
+    1.5rem
+    4rem
+    rgba(65, 101, 232, 0.25);
+
+  transition:
+    opacity 0.25s ease,
+    scale
+    0.45s
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.work-v8-cursor svg {
+  width: 0.92rem;
+}
+
+
+.work-v8-cursor.is-visible {
+  opacity: 1;
+
+  scale: 1;
+}
+
+
+/* ==========================================================
+   END
+========================================================== */
+
+.work-v8-end {
+  width:
+    min(
+      calc(100% - 6rem),
+      1480px
+    );
+
+  margin:
+    clamp(10rem, 16vw, 17rem)
+    auto
+    0;
+}
+
+
+.work-v8-end-line {
+  height: 1px;
+
+  background:
+    var(--work-line);
+}
+
+
+.work-v8-end-grid {
+  padding-top: 1.6rem;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 4rem;
+}
+
+
+.work-v8-end-grid > div {
+  max-width: 26rem;
+}
+
+
+.work-v8-end-grid > div > span {
+  display: block;
+
+  margin-bottom: 0.7rem;
+
+  color: var(--work-muted);
+
+  font-size: 0.58rem;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.14em;
+}
+
+
+.work-v8-end-grid p {
+  margin: 0;
+
+  color: #666b70;
+
+  font-size: 0.78rem;
+
+  line-height: 1.55;
+}
+
+
+.work-v8-end-grid > a {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.7rem;
+
+  font-size:
+    clamp(1.3rem, 2vw, 2rem);
+
+  letter-spacing: -0.04em;
+}
+
+
+.work-v8-end-grid > a svg {
+  width: 1.2rem;
+
+  transition:
+    transform
+    0.4s
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.work-v8-end-grid > a:hover svg {
+  transform:
+    translate(4px, -4px);
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 1050px) {
+
+  .work-v8-intro,
+  .work-v8-end {
+    width:
+      calc(100% - 3rem);
+  }
+
+
+  .work-v8-projects {
+    width:
+      calc(100% - 2rem);
+  }
+
+
+  .work-v8-intro-grid {
+    grid-template-columns:
+      minmax(0, 1fr)
+      16rem;
+
+    gap: 4rem;
+  }
+
+
+  .work-v8-project--offset-right
+  .work-v8-visual,
+  .work-v8-project--offset-left
+  .work-v8-visual {
+    width: 92%;
+  }
+
+
+  .work-v8-info {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(17rem, 0.46fr);
+
+    gap: 4rem;
+  }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 760px) {
+
+  .work-v8 {
+    padding:
+      7rem
+      0
+      9rem;
+  }
+
+
+  .work-v8-intro {
+    width:
+      calc(100% - 2rem);
+
+    margin-bottom: 6rem;
+  }
+
+
+  .work-v8-intro-top {
+    font-size: 0.5rem;
+  }
+
+
+  .work-v8-intro-top
+  span:last-child {
+    text-align: right;
+  }
+
+
+  .work-v8-intro-grid {
+    display: block;
+
+    margin-top: 2.8rem;
+  }
+
+
+  .work-v8-intro h2 {
+    font-size:
+      clamp(3.2rem, 15vw, 5.4rem);
+  }
+
+
+  .work-v8-intro-copy {
+    margin-top: 3rem;
+
+    max-width: 21rem;
+  }
+
+
+  .work-v8-counter {
+    display: none;
+  }
+
+
+  .work-v8-projects {
+    width:
+      calc(100% - 1.4rem);
+
+    gap: 7rem;
+  }
+
+
+  .work-v8-project--wide
+  .work-v8-visual,
+  .work-v8-project--offset-right
+  .work-v8-visual,
+  .work-v8-project--offset-left
+  .work-v8-visual {
+    width: 100%;
+
+    margin: 0;
+  }
+
+
+  .work-v8-visual {
+    aspect-ratio: 4 / 3;
+
+    border-radius: 0.6rem;
+  }
+
+
+  .work-v8-image img {
+    left: -4%;
+    top: -4%;
+
+    width: 108%;
+    height: 108%;
+  }
+
+
+  .work-v8-number {
+    font-size: 23vw;
+  }
+
+
+  .work-v8-info {
+    display: block;
+
+    padding-top: 1.5rem;
+  }
+
+
+  .work-v8-title h3 {
+    font-size:
+      clamp(2.8rem, 13vw, 4.8rem);
+  }
+
+
+  .work-v8-details {
+    margin-top: 1.8rem;
+  }
+
+
+  .work-v8-details > p {
+    max-width: 25rem;
+  }
+
+
+  .work-v8-cursor {
+    display: none;
+  }
+
+
+  .work-v8-end {
+    width:
+      calc(100% - 2rem);
+
+    margin-top: 8rem;
+  }
+
+
+  .work-v8-end-grid {
+    display: block;
+  }
+
+
+  .work-v8-end-grid > a {
+    margin-top: 2.5rem;
+  }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .work-v8-visual,
+  .work-v8-image img,
+  .work-v8-info {
+    transform:
+      none !important;
+  }
+
+
+  .work-v8-live-dot::after {
+    animation: none;
+  }
+
+
+  .work-v8-cursor {
+    display: none;
+  }
+
+}

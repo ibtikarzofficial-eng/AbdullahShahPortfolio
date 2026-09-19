@@ -1,0 +1,8 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="760" rx="40" fill="#DDD7CE"/>
+<rect x="86" y="76" width="1028" height="610" rx="28" fill="#171719"/>
+<rect x="144" y="138" width="250" height="340" rx="12" fill="#AFA397" transform="rotate(-9 144 138)"/>
+<rect x="470" y="112" width="260" height="362" rx="12" fill="#615C58" transform="rotate(5 470 112)"/>
+<rect x="788" y="150" width="250" height="336" rx="12" fill="#8D847A" transform="rotate(-4 788 150)"/>
+<text x="118" y="620" fill="#F7F4EF" font-family="Arial" font-size="54" font-weight="700">3D Photography Experience</text>
+</svg>

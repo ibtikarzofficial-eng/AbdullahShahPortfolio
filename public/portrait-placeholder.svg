@@ -1,0 +1,12 @@
+<svg width="900" height="1200" viewBox="0 0 900 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="body" x1="450" y1="0" x2="450" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A3B43"/>
+      <stop offset="1" stop-color="#101B20"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="450" cy="247" rx="168" ry="200" fill="#D5D1C8"/>
+  <path d="M206 640C245 520 338 454 450 454C562 454 655 520 694 640L820 1200H80L206 640Z" fill="url(#body)"/>
+  <path d="M303 180C329 81 413 30 503 52C573 69 624 122 629 199C586 156 534 137 467 139C406 141 355 156 303 180Z" fill="#262626"/>
+  <text x="450" y="1080" fill="white" fill-opacity="0.45" font-family="Arial, sans-serif" font-size="32" text-anchor="middle">ADD YOUR TRANSPARENT PORTRAIT</text>
+</svg>
