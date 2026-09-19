@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  />
+  <title>Form Handler</title>
+</head>
+
+<body>
+
+  <!--
+    Static Netlify form blueprint.
+
+    This file is copied by Vite directly into /dist
+    and is scanned by Netlify during deployment.
+
+    The field names MUST match Contact.jsx.
+  -->
+
+  <form
+    name="project-enquiry"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+  >
+
+    <input
+      type="hidden"
+      name="form-name"
+      value="project-enquiry"
+    />
+
+    <p hidden>
+      <label>
+        Do not fill this field:
+        <input name="bot-field" />
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Name
+        <input
+          type="text"
+          name="name"
+        />
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+        />
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Project Type
+
+        <select name="projectType">
+
+          <option value="Website">
+            Website
+          </option>
+
+          <option value="Website Redesign">
+            Website Redesign
+          </option>
+
+          <option value="Interactive / 3D">
+            Interactive / 3D
+          </option>
+
+          <option value="Portfolio">
+            Portfolio
+          </option>
+
+          <option value="SEO / Performance">
+            SEO / Performance
+          </option>
+
+          <option value="Other">
+            Other
+          </option>
+
+        </select>
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Message
+
+        <textarea
+          name="message"
+        ></textarea>
+      </label>
+    </p>
+
+    <button type="submit">
+      Submit
+    </button>
+
+  </form>
+
+</body>
+</html>
