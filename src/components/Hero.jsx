@@ -641,7 +641,7 @@ export default function Hero({ ready }) {
               className="hero-modern-portrait-inner"
             >
               <img
-                src="/abdullah-hero.png"
+                src="/abdullah-hero.webp"
                 alt="Abdullah Shah"
                 loading="eager"
                 fetchPriority="high"
