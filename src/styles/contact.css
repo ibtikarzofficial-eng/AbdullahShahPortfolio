@@ -4,8 +4,6 @@
 
 .contact-final {
   --contact-bg: #17181b;
-  --contact-surface: #202125;
-
   --contact-text: #f5f6f7;
   --contact-muted: #85898f;
 
@@ -26,14 +24,19 @@
 
   margin-top: -100svh;
 
-  background: var(--contact-bg);
+  background:
+    var(--contact-bg);
 
-  color: var(--contact-text);
+  color:
+    var(--contact-text);
 }
 
 
 /* ==========================================================
    STAGE
+
+   PRODUCTION-SAFE:
+   Visible even without JavaScript.
 ========================================================== */
 
 .contact-final__stage {
@@ -46,18 +49,17 @@
 
   overflow: hidden;
 
-  background: var(--contact-bg);
+  background:
+    var(--contact-bg);
 
-  opacity: 0;
+  opacity: 1;
 
-  transform:
-    scale(0.985);
+  transform: none;
 
-  filter:
-    blur(10px);
+  filter: none;
 
   transform-origin:
-    center;
+    center center;
 
   will-change:
     opacity,
@@ -120,7 +122,7 @@
 
 
 /* ==========================================================
-   BACKGROUND MONOGRAM
+   BACKGROUND MARK
 ========================================================== */
 
 .contact-final__mark {
@@ -141,7 +143,8 @@
 
   line-height: 0.69;
 
-  letter-spacing: -0.13em;
+  letter-spacing:
+    -0.13em;
 
   white-space: nowrap;
 
@@ -214,6 +217,8 @@
   width: 0.48rem;
   height: 0.48rem;
 
+  flex: 0 0 auto;
+
   border-radius: 50%;
 
   background:
@@ -243,21 +248,15 @@
 
 
 @keyframes contactStatus {
-
   from {
     opacity: 1;
-
-    transform:
-      scale(0.7);
+    transform: scale(0.7);
   }
 
   to {
     opacity: 0;
-
-    transform:
-      scale(1.7);
+    transform: scale(1.7);
   }
-
 }
 
 
@@ -356,7 +355,8 @@
 
   line-height: 1.6;
 
-  letter-spacing: -0.02em;
+  letter-spacing:
+    -0.02em;
 }
 
 
@@ -405,7 +405,7 @@
 
 
 /* ==========================================================
-   FORM AREA
+   FORM
 ========================================================== */
 
 .contact-final__form-area {
@@ -418,7 +418,8 @@
 
   display: flex;
 
-  justify-content: space-between;
+  justify-content:
+    space-between;
 
   gap: 2rem;
 
@@ -433,15 +434,13 @@
 
   font-weight: 600;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
-  letter-spacing: 0.14em;
+  letter-spacing:
+    0.14em;
 }
 
-
-/* ==========================================================
-   FORM
-========================================================== */
 
 .contact-final__form {
   width: 100%;
@@ -455,6 +454,7 @@
   height: 1px !important;
 
   padding: 0 !important;
+
   margin: -1px !important;
 
   overflow: hidden !important;
@@ -494,9 +494,11 @@
 
   font-weight: 600;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
-  letter-spacing: 0.12em;
+  letter-spacing:
+    0.12em;
 }
 
 
@@ -506,7 +508,6 @@
   width: 100%;
 
   margin: 0;
-
   padding: 0;
 
   border: 0;
@@ -524,7 +525,8 @@
 
   font-weight: 400;
 
-  letter-spacing: -0.025em;
+  letter-spacing:
+    -0.025em;
 
   resize: none;
 }
@@ -542,10 +544,8 @@
 }
 
 
-.contact-final__field
-input::placeholder,
-.contact-final__field
-textarea::placeholder {
+.contact-final__field input::placeholder,
+.contact-final__field textarea::placeholder {
   color: #62666c;
 
   opacity: 1;
@@ -559,15 +559,45 @@ textarea::placeholder {
 }
 
 
-.contact-final__field select:invalid {
-  color: #62666c;
-}
-
-
 .contact-final__field option {
   background: #202125;
 
   color: #ffffff;
+}
+
+
+/* ==========================================================
+   AUTOFILL
+
+   Removes browser's pale blue autofill boxes.
+========================================================== */
+
+.contact-final__field input:-webkit-autofill,
+.contact-final__field input:-webkit-autofill:hover,
+.contact-final__field input:-webkit-autofill:focus,
+.contact-final__field textarea:-webkit-autofill,
+.contact-final__field select:-webkit-autofill {
+  -webkit-text-fill-color:
+    #ffffff;
+
+  -webkit-box-shadow:
+    0 0 0
+    1000px
+    #17181b
+    inset;
+
+  box-shadow:
+    0 0 0
+    1000px
+    #17181b
+    inset;
+
+  caret-color:
+    #ffffff;
+
+  transition:
+    background-color
+    9999s ease-out;
 }
 
 
@@ -592,7 +622,12 @@ textarea::placeholder {
   transition:
     width
     0.5s
-    cubic-bezier(0.16, 1, 0.3, 1);
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    );
 }
 
 
@@ -606,8 +641,6 @@ textarea::placeholder {
 ========================================================== */
 
 .contact-final__submit {
-  position: relative;
-
   width: 100%;
 
   min-height: 4.8rem;
@@ -623,11 +656,10 @@ textarea::placeholder {
   display: flex;
 
   align-items: center;
-  justify-content: space-between;
+  justify-content:
+    space-between;
 
   gap: 1rem;
-
-  overflow: hidden;
 
   border: 0;
 
@@ -645,8 +677,10 @@ textarea::placeholder {
   font-weight: 600;
 
   transition:
-    background 0.3s ease,
-    transform 0.3s ease;
+    background
+    0.3s ease,
+    transform
+    0.3s ease;
 }
 
 
@@ -662,9 +696,9 @@ textarea::placeholder {
 
 
 .contact-final__submit:disabled {
-  cursor: wait;
-
   opacity: 0.7;
+
+  cursor: wait;
 }
 
 
@@ -687,15 +721,17 @@ textarea::placeholder {
   width: 1rem;
 
   transition:
-    transform
-    0.35s ease;
+    transform 0.35s ease;
 }
 
 
 .contact-final__submit:hover
 .contact-final__submit-icon svg {
   transform:
-    translate(4px, -4px);
+    translate(
+      4px,
+      -4px
+    );
 }
 
 
@@ -760,7 +796,8 @@ textarea::placeholder {
 }
 
 
-.contact-final__success > span:not(
+.contact-final__success >
+span:not(
   .contact-final__success-icon
 ) {
   color:
@@ -772,7 +809,8 @@ textarea::placeholder {
 
   text-transform: uppercase;
 
-  letter-spacing: 0.15em;
+  letter-spacing:
+    0.15em;
 }
 
 
@@ -789,7 +827,8 @@ textarea::placeholder {
 
   line-height: 0.95;
 
-  letter-spacing: -0.06em;
+  letter-spacing:
+    -0.06em;
 }
 
 
@@ -830,7 +869,7 @@ textarea::placeholder {
 
 
 /* ==========================================================
-   BOTTOM RULE
+   RULE + FOOTER
 ========================================================== */
 
 .contact-final__rule {
@@ -841,10 +880,6 @@ textarea::placeholder {
     var(--contact-line);
 }
 
-
-/* ==========================================================
-   FOOTER
-========================================================== */
 
 .contact-final__footer {
   padding-top: 1.25rem;
@@ -883,7 +918,8 @@ textarea::placeholder {
 
   text-transform: uppercase;
 
-  letter-spacing: 0.14em;
+  letter-spacing:
+    0.14em;
 }
 
 
@@ -905,44 +941,9 @@ textarea::placeholder {
 
 
 .contact-final__footer-group nav a {
-  position: relative;
-
   color: #f0f1f2;
 
   font-size: 0.73rem;
-}
-
-
-.contact-final__footer-group nav a::after {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  bottom: -0.3rem;
-
-  width: 100%;
-  height: 1px;
-
-  background: #ffffff;
-
-  transform:
-    scaleX(0);
-
-  transform-origin: right;
-
-  transition:
-    transform
-    0.35s ease;
-}
-
-
-.contact-final__footer-group
-nav a:hover::after {
-  transform:
-    scaleX(1);
-
-  transform-origin: left;
 }
 
 
@@ -989,10 +990,7 @@ nav a:hover::after {
 
 
 /* ==========================================================
-   MOBILE / SMALL TABLET
-
-   On smaller screens we intentionally stop pinning Contact.
-   A large form inside a 100vh sticky stage is bad UX.
+   MOBILE
 ========================================================== */
 
 @media (max-width: 820px) {
@@ -1009,13 +1007,9 @@ nav a:hover::after {
   .contact-final__stage {
     position: relative;
 
-    top: auto;
-
     height: auto;
 
     min-height: 100svh;
-
-    overflow: hidden;
 
     opacity: 1 !important;
 
@@ -1058,22 +1052,6 @@ nav a:hover::after {
   }
 
 
-  .contact-final__intro > p {
-    max-width: 27rem;
-
-    margin-top: 1.5rem;
-  }
-
-
-  .contact-final__direct {
-    margin-top: 2rem;
-
-    display: grid;
-
-    gap: 0.8rem;
-  }
-
-
   .contact-final__form-area {
     margin-top: 5rem;
   }
@@ -1102,17 +1080,10 @@ nav a:hover::after {
 
   .contact-final__mark {
     right: -25vw;
+
     bottom: 5vh;
 
     font-size: 92vw;
-  }
-
-
-  .contact-final__lines
-  span:nth-child(2),
-  .contact-final__lines
-  span:nth-child(4) {
-    display: none;
   }
 
 }
@@ -1124,18 +1095,6 @@ nav a:hover::after {
 
 @media (max-width: 480px) {
 
-  .contact-final__top {
-    align-items: flex-start;
-  }
-
-
-  .contact-final__location {
-    max-width: 8rem;
-
-    text-align: right;
-  }
-
-
   .contact-final__main {
     padding-top: 6rem;
   }
@@ -1144,13 +1103,6 @@ nav a:hover::after {
   .contact-final__intro h2 {
     font-size:
       clamp(3rem, 14vw, 4.6rem);
-  }
-
-
-  .contact-final__field input,
-  .contact-final__field select,
-  .contact-final__field textarea {
-    font-size: 1rem;
   }
 
 
@@ -1188,6 +1140,11 @@ nav a:hover::after {
 
 
   .contact-final__stage {
+    opacity: 1 !important;
+
+    transform:
+      none !important;
+
     filter:
       none !important;
   }
