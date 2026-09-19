@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -20,14 +21,17 @@ import '../styles/contact.css';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
+  const sectionRef = useRef(null);
   const stageRef = useRef(null);
   const markRef = useRef(null);
-  const submitButtonRef = useRef(null);
 
-  const [time, setTime] = useState('');
+  const [time, setTime] =
+    useState('');
 
-  const [formStatus, setFormStatus] =
-    useState('idle');
+  const [
+    formStatus,
+    setFormStatus,
+  ] = useState('idle');
 
   /* ========================================================
      LOCAL TIME
@@ -52,7 +56,7 @@ export default function Contact() {
         }
       );
 
-    const update = () => {
+    const updateTime = () => {
       setTime(
         formatter.format(
           new Date()
@@ -60,11 +64,11 @@ export default function Contact() {
       );
     };
 
-    update();
+    updateTime();
 
     const interval =
       window.setInterval(
-        update,
+        updateTime,
         30000
       );
 
@@ -77,101 +81,137 @@ export default function Contact() {
 
   /* ========================================================
      ABOUT -> CONTACT REVEAL
+
+     IMPORTANT:
+     Contact is visible by DEFAULT in CSS.
+
+     JS only enhances the reveal.
+
+     If GSAP ever fails, Contact remains completely usable.
   ======================================================== */
 
-  useEffect(() => {
-    const previousSection =
+  useLayoutEffect(() => {
+    const stage =
+      stageRef.current;
+
+    const section =
+      sectionRef.current;
+
+    const about =
       document.querySelector(
         '.about-v1'
       );
 
-    const stage =
-      stageRef.current;
-
     if (
-      !previousSection ||
-      !stage
+      !stage ||
+      !section ||
+      !about
     ) {
       return;
     }
 
-    gsap.set(stage, {
-      opacity: 0,
+    const ctx =
+      gsap.context(() => {
+        /*
+         * We use immediateRender:false.
+         *
+         * Contact therefore does NOT get
+         * hidden during initial page render.
+         */
 
-      scale: 0.985,
+        gsap.fromTo(
+          stage,
+          {
+            opacity: 0.18,
 
-      filter:
-        'blur(10px)',
+            scale: 0.985,
 
-      transformOrigin:
-        'center center',
-    });
-
-    const reveal =
-      gsap.to(stage, {
-        opacity: 1,
-
-        scale: 1,
-
-        filter:
-          'blur(0px)',
-
-        ease: 'none',
-
-        scrollTrigger: {
-          trigger:
-            previousSection,
-
-          start:
-            'bottom bottom',
-
-          end:
-            'bottom top',
-
-          scrub: 1,
-
-          invalidateOnRefresh:
-            true,
-        },
-      });
-
-    const markAnimation =
-      gsap.fromTo(
-        markRef.current,
-        {
-          yPercent: 10,
-        },
-        {
-          yPercent: -4,
-
-          ease: 'none',
-
-          scrollTrigger: {
-            trigger:
-              previousSection,
-
-            start:
-              'bottom bottom',
-
-            end:
-              'bottom top',
-
-            scrub: 1.5,
+            filter:
+              'blur(7px)',
           },
+          {
+            opacity: 1,
+
+            scale: 1,
+
+            filter:
+              'blur(0px)',
+
+            ease: 'none',
+
+            immediateRender:
+              false,
+
+            scrollTrigger: {
+              trigger: about,
+
+              start:
+                'bottom bottom',
+
+              end:
+                'bottom top',
+
+              scrub: 0.8,
+
+              invalidateOnRefresh:
+                true,
+            },
+          }
+        );
+
+        if (markRef.current) {
+          gsap.fromTo(
+            markRef.current,
+            {
+              yPercent: 8,
+            },
+            {
+              yPercent: -3,
+
+              ease: 'none',
+
+              immediateRender:
+                false,
+
+              scrollTrigger: {
+                trigger: about,
+
+                start:
+                  'bottom bottom',
+
+                end:
+                  'bottom top',
+
+                scrub: 1.2,
+              },
+            }
+          );
+        }
+      }, section);
+
+    /*
+     * Images/layout can affect page height.
+     * Give browser one frame, then recalculate.
+     */
+
+    const refreshFrame =
+      requestAnimationFrame(
+        () => {
+          ScrollTrigger.refresh();
         }
       );
 
-    ScrollTrigger.refresh();
-
     return () => {
-      reveal.kill();
+      cancelAnimationFrame(
+        refreshFrame
+      );
 
-      markAnimation.kill();
+      ctx.revert();
     };
   }, []);
 
   /* ========================================================
-     SUBTLE BACKGROUND DEPTH
+     SUBTLE POINTER DEPTH
   ======================================================== */
 
   useEffect(() => {
@@ -190,7 +230,7 @@ export default function Contact() {
         mark,
         'x',
         {
-          duration: 1.5,
+          duration: 1.4,
           ease: 'power3.out',
         }
       );
@@ -200,7 +240,7 @@ export default function Contact() {
         mark,
         'y',
         {
-          duration: 1.5,
+          duration: 1.4,
           ease: 'power3.out',
         }
       );
@@ -230,9 +270,9 @@ export default function Contact() {
           rect.height -
         0.5;
 
-      moveX(x * 18);
+      moveX(x * 15);
 
-      moveY(y * 10);
+      moveY(y * 8);
     };
 
     const reset = () => {
@@ -264,7 +304,7 @@ export default function Contact() {
   }, []);
 
   /* ========================================================
-     NETLIFY FORM SUBMIT
+     NETLIFY FORM
   ======================================================== */
 
   const handleSubmit =
@@ -284,6 +324,11 @@ export default function Contact() {
       const formData =
         new FormData(form);
 
+      formData.set(
+        'form-name',
+        'project-enquiry'
+      );
+
       const encoded =
         new URLSearchParams();
 
@@ -302,21 +347,24 @@ export default function Contact() {
 
       try {
         const response =
-          await fetch('/', {
-            method: 'POST',
+          await fetch(
+            '/netlify-form.html',
+            {
+              method: 'POST',
 
-            headers: {
-              'Content-Type':
-                'application/x-www-form-urlencoded',
-            },
+              headers: {
+                'Content-Type':
+                  'application/x-www-form-urlencoded',
+              },
 
-            body:
-              encoded.toString(),
-          });
+              body:
+                encoded.toString(),
+            }
+          );
 
         if (!response.ok) {
           throw new Error(
-            'Form submission failed.'
+            `Form submission failed: ${response.status}`
           );
         }
 
@@ -326,7 +374,10 @@ export default function Contact() {
           'success'
         );
       } catch (error) {
-        console.error(error);
+        console.error(
+          'Netlify form error:',
+          error
+        );
 
         setFormStatus(
           'error'
@@ -336,6 +387,7 @@ export default function Contact() {
 
   return (
     <section
+      ref={sectionRef}
       id="contact"
       className="contact-final"
     >
@@ -408,12 +460,13 @@ export default function Contact() {
 
               <p>
                 Tell me what you&apos;re
-                working on. Whether it&apos;s
-                a production website,
-                redesign, portfolio or
-                interactive experience,
-                we can figure out the right
-                way to build it.
+                working on. Whether
+                it&apos;s a production
+                website, redesign,
+                portfolio or interactive
+                experience, we can figure
+                out the right way to
+                build it.
               </p>
 
               <div className="contact-final__direct">
@@ -422,9 +475,7 @@ export default function Contact() {
                   href="mailto:m.Abdullah.tech.dev@gmail.com"
                 >
                   <Mail
-                    strokeWidth={
-                      1.3
-                    }
+                    strokeWidth={1.3}
                   />
 
                   <span>
@@ -438,9 +489,7 @@ export default function Contact() {
                   rel="noopener noreferrer"
                 >
                   <MessageCircle
-                    strokeWidth={
-                      1.3
-                    }
+                    strokeWidth={1.3}
                   />
 
                   <span>
@@ -452,9 +501,7 @@ export default function Contact() {
                   href="tel:+923247556451"
                 >
                   <Phone
-                    strokeWidth={
-                      1.3
-                    }
+                    strokeWidth={1.3}
                   />
 
                   <span>
@@ -490,9 +537,7 @@ export default function Contact() {
                   <span className="contact-final__success-icon">
 
                     <Check
-                      strokeWidth={
-                        1.4
-                      }
+                      strokeWidth={1.4}
                     />
 
                   </span>
@@ -531,6 +576,7 @@ export default function Contact() {
                 <form
                   name="project-enquiry"
                   method="POST"
+                  action="/netlify-form.html"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
                   className="contact-final__form"
@@ -538,6 +584,7 @@ export default function Contact() {
                     handleSubmit
                   }
                 >
+
                   <input
                     type="hidden"
                     name="form-name"
@@ -547,11 +594,12 @@ export default function Contact() {
                   <p className="contact-final__honeypot">
 
                     <label>
-                      Do not fill this
-                      field
+                      Do not fill this field
 
                       <input
                         name="bot-field"
+                        tabIndex="-1"
+                        autoComplete="off"
                       />
                     </label>
 
@@ -604,11 +652,12 @@ export default function Contact() {
                     </label>
 
                     <select
-  id="contact-project"
-  name="projectType"
-  defaultValue=""
-  required
->
+                      id="contact-project"
+                      name="projectType"
+                      defaultValue=""
+                      required
+                    >
+
                       <option
                         value=""
                         disabled
@@ -678,9 +727,6 @@ export default function Contact() {
                   )}
 
                   <button
-                    ref={
-                      submitButtonRef
-                    }
                     type="submit"
                     className="contact-final__submit"
                     disabled={
@@ -699,9 +745,7 @@ export default function Contact() {
                     <span className="contact-final__submit-icon">
 
                       <ArrowUpRight
-                        strokeWidth={
-                          1.4
-                        }
+                        strokeWidth={1.4}
                       />
 
                     </span>
@@ -716,7 +760,7 @@ export default function Contact() {
 
           </div>
 
-          {/* FOOTER */}
+          {/* BOTTOM */}
 
           <div className="contact-final__rule" />
 
@@ -785,7 +829,6 @@ export default function Contact() {
           </div>
 
         </div>
-
       </div>
     </section>
   );
