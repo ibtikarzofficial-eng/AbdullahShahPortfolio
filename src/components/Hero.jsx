@@ -571,7 +571,7 @@ export default function Hero({ ready }) {
         <div className="hero-modern-left">
 
           <span className="hero-modern-kicker">
-            Creative Developer / 2026
+            Muhammad Abdullah Shah / 2026
           </span>
 
           <div
@@ -642,8 +642,9 @@ export default function Hero({ ready }) {
             >
               <img
                 src="/abdullah-hero.webp"
-                alt="Abdullah Shah"
+                alt="Muhammad Abdullah Shah — Creative Web Developer"
                 loading="eager"
+                decoding="async"
                 fetchPriority="high"
               />
             </div>

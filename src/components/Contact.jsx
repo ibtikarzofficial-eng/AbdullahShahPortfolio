@@ -287,12 +287,7 @@ export default function Contact() {
   }, []);
 
   /* ========================================================
-     NETLIFY SUBMISSION
-
-     IMPORTANT:
-     POST DIRECTLY TO "/"
-
-     This matches Netlify's documented AJAX pattern.
+     FORMSPREE SUBMISSION
   ======================================================== */
 
   const handleSubmit =
@@ -312,49 +307,26 @@ export default function Contact() {
       const formData =
         new FormData(form);
 
-      /*
-       * Explicitly ensure the registered
-       * Netlify form name is present.
-       */
-
-      formData.set(
-        'form-name',
-        'project-enquiry'
-      );
-
-      const body =
-        new URLSearchParams();
-
-      formData.forEach(
-        (value, key) => {
-          body.append(
-            key,
-            String(value)
-          );
-        }
-      );
-
       setFormStatus(
         'submitting'
       );
 
       try {
         const response =
-          await fetch('/', {
-            method: 'POST',
-
-            headers: {
-              'Content-Type':
-                'application/x-www-form-urlencoded',
-            },
-
-            body:
-              body.toString(),
-          });
+          await fetch(
+            'https://formspree.io/f/xppwwgoe',
+            {
+              method: 'POST',
+              body: formData,
+              headers: {
+                Accept: 'application/json',
+              },
+            }
+          );
 
         if (!response.ok) {
           throw new Error(
-            `Netlify returned ${response.status}`
+            `Formspree returned ${response.status}`
           );
         }
 
@@ -365,7 +337,7 @@ export default function Contact() {
         );
       } catch (error) {
         console.error(
-          'Netlify form submission failed:',
+          'Formspree submission failed:',
           error
         );
 
@@ -605,43 +577,13 @@ export default function Contact() {
                 ========================================== */
 
                 <form
-                  name="project-enquiry"
+                  action="https://formspree.io/f/xppwwgoe"
                   method="POST"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
                   className="contact-final__form"
                   onSubmit={
                     handleSubmit
                   }
                 >
-
-                  {/* FORM NAME */}
-
-                  <input
-                    type="hidden"
-                    name="form-name"
-                    value="project-enquiry"
-                  />
-
-
-                  {/* HONEYPOT */}
-
-                  <p className="contact-final__honeypot">
-
-                    <label>
-
-                      Leave this field
-                      empty
-
-                      <input
-                        name="bot-field"
-                        tabIndex="-1"
-                        autoComplete="off"
-                      />
-
-                    </label>
-
-                  </p>
 
 
                   {/* NAME */}

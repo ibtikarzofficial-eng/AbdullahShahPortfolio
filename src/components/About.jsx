@@ -431,8 +431,9 @@ export default function About() {
             />
 
             <p>
-              I&apos;m Abdullah Shah, a developer
-              focused on building digital experiences
+              I&apos;m Muhammad Abdullah Shah, professionally
+              known as Abdullah Shah — a creative web developer
+              and founder of IbtikarZ, focused on digital experiences
               that are visually considered,
               technically reliable and ready for
               production.
@@ -471,8 +472,10 @@ export default function About() {
                 className="about-v1-profile-image-inner"
               >
                 <img
-                  src="/abdullah-hero.png"
-                  alt="Abdullah Shah"
+                  src="/abdullah-hero.webp"
+                  alt="Muhammad Abdullah Shah — Creative Web Developer"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -483,7 +486,7 @@ export default function About() {
               <div className="about-v1-profile-name">
 
                 <strong>
-                  Abdullah Shah
+                  Muhammad Abdullah Shah
                 </strong>
 
                 <span>
