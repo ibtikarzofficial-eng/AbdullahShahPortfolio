@@ -71,30 +71,33 @@ const projects = [
   },
 
   {
-    id: '03',
-    type: 'Founder / Studio',
-    title: 'IbtikarZ',
-    eyebrow: 'Digital Studio / Worldwide',
-    year: '2026',
-    context: 'Founder Project',
+  id: '03',
+  type: 'Founder / Studio',
+  title: 'IbtikarZ',
+  eyebrow: 'Digital Studio / Worldwide',
+  year: '2026',
+  context: 'Self-Initiated Founder Project',
 
-    services: [
-      'Creative Direction',
-      'Web Development',
-      'SEO',
-      '3D Web',
-    ],
+  services: [
+    'Creative Direction',
+    'Web Development',
+    'SEO',
+    '3D Web',
+  ],
 
-    description:
-      'A founder-led digital studio positioned around two sides of modern web development: growth-focused websites and immersive interactive experiences.',
+  description:
+    'A founder-led digital studio built to bring growth-focused websites and immersive interactive experiences under one clear, commercially focused identity.',
 
-    image: '/projects/ibtikarz.webp',
+  image: '/projects/ibtikarz.webp',
 
-    liveUrl: 'https://ibtikarz.com/',
+  liveUrl: 'https://ibtikarz.com/',
 
-    layout: 'offset-left',
-    media: 'ibtikarz',
-  },
+  caseStudyUrl:
+    '/case-studies/ibtikarz/',
+
+  layout: 'offset-left',
+  media: 'ibtikarz',
+},,
 
   {
     id: '04',
@@ -566,30 +569,53 @@ export default function Work() {
               ============================================= */}
 
               <a
-                ref={(element) => {
-                  visualRefs.current[
-                    index
-                  ] = element;
-                }}
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="work-v8-visual"
-                aria-label={`Visit ${project.title} live website`}
-                onPointerEnter={() =>
-                  setHoveringProject(true)
-                }
-                onPointerMove={(event) =>
-                  handleProjectMove(
-                    event,
-                    index
-                  )
-                }
-                onPointerLeave={() => {
-                  setHoveringProject(false);
-                  resetProject(index);
-                }}
-              >
+  ref={(element) => {
+    visualRefs.current[
+      index
+    ] = element;
+  }}
+
+  href={
+    project.caseStudyUrl ||
+    project.liveUrl
+  }
+
+  target={
+    project.caseStudyUrl
+      ? undefined
+      : '_blank'
+  }
+
+  rel={
+    project.caseStudyUrl
+      ? undefined
+      : 'noopener noreferrer'
+  }
+
+  className="work-v8-visual"
+
+  aria-label={
+    project.caseStudyUrl
+      ? `Read ${project.title} case study`
+      : `Visit ${project.title} live website`
+  }
+
+  onPointerEnter={() =>
+    setHoveringProject(true)
+  }
+
+  onPointerMove={(event) =>
+    handleProjectMove(
+      event,
+      index
+    )
+  }
+
+  onPointerLeave={() => {
+    setHoveringProject(false);
+    resetProject(index);
+  }}
+>
 
                 <div className="work-v8-image">
 
@@ -623,11 +649,15 @@ export default function Work() {
 
                 <div className="work-v8-live">
 
-                  <span className="work-v8-live-dot" />
+  <span className="work-v8-live-dot" />
 
-                  Live website
+  {
+    project.caseStudyUrl
+      ? 'Read case study'
+      : 'Live website'
+  }
 
-                </div>
+</div>
 
                 <span className="work-v8-number">
                   {project.id}
@@ -684,20 +714,45 @@ export default function Work() {
 
                   </div>
 
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="work-v8-link"
-                  >
+                  <div className="work-v8-links">
 
-                    Visit live website
+  {project.caseStudyUrl && (
 
-                    <ArrowUpRight
-                      strokeWidth={1.35}
-                    />
+    <a
+      href={project.caseStudyUrl}
+      className="
+        work-v8-link
+        work-v8-link--primary
+      "
+    >
 
-                  </a>
+      Read case study
+
+      <ArrowUpRight
+        strokeWidth={1.35}
+      />
+
+    </a>
+
+  )}
+
+
+  <a
+    href={project.liveUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="work-v8-link"
+  >
+
+    Visit live website
+
+    <ArrowUpRight
+      strokeWidth={1.35}
+    />
+
+  </a>
+
+</div>
 
                 </div>
 
