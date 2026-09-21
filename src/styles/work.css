@@ -767,13 +767,30 @@
   background: var(--work-blue);
 }
 
+/* ==========================================================
+   PROJECT LINKS
+========================================================== */
+
+.work-v8-links {
+  margin-top: 2rem;
+
+  display: flex;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap:
+    0.9rem
+    1.6rem;
+}
+
 
 /* ==========================================================
    LIVE LINK
 ========================================================== */
 
 .work-v8-link {
-  margin-top: 2rem;
+  margin-top: 0;
 
   display: inline-flex;
 
